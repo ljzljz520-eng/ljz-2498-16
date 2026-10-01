@@ -11,7 +11,11 @@ COPY .npmrc package.json pnpm-lock.yaml* ./
 RUN pnpm install --no-frozen-lockfile
 
 COPY . .
+RUN pnpm build
 
+ENV PORT=3000
+ENV PROOF_DATA_DIR=/app/data
 EXPOSE 3000
 
-CMD ["pnpm", "dev"]
+# 单进程：同时提供 /api 规则校对服务与 dist/ 静态资源
+CMD ["node", "server/index.js"]
