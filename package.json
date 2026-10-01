@@ -5,9 +5,13 @@
   "type": "module",
   "packageManager": "pnpm@10.28.2",
   "scripts": {
-    "dev": "vite --host 0.0.0.0 --port 3000",
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "node server/http.js",
+    "dev:web": "vite --host 0.0.0.0 --port 3000",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "node server/http.js",
+    "start": "node server/http.js",
+    "test": "node --test test/"
   },
   "dependencies": {
     "vue": "^3.5.24"
@@ -15,5 +19,10 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
     "vite": "^7.2.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
